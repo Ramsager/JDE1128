@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+<!-- CSS styles-->
+h1 {color:#000000; text-align: center; font-family: Arial;}
+.center {
+  display: flex;
+  justify-content: center;
+  vertical-align: top;
+  height: 400px;
+}
+.center2 {
+  display: flex;
+  justify-content: center;
+  vertical-align: top;
+  height: 20px;
+      }
+</style>
+</style>
+</head>
+
+<!--Begin site-->
+<body>
+<h1> Georgia Tech Wildlife Cam Tagging </h1>
+<div class = "center">
+<!-- Create an area with a border for an image-->
+<form name="imageForm">
+  <table border=1>
+  <tr>	
+	<td>
+<!-- Displays image -->
+      <img style="max-width: 650px; max-height: 300px" src="blank.jpg" name="canvas" />
+    </td>
+  </tr>
+  </table>  
+<!-- Text for user and dropdown menu-->
+The current animal is:  <span id="suspectedTag"></span> <br>
+Animal in Picture: <select id = "dropdown">
+<option value = "none" selected disabled>Select Species</option>
+        <option value = "Cat">Cat</option>
+	<option value = "Dog">Dog</option>
+	<option value = "Frog">Frog</option>
+	<option value = "Hawk">Hawk</option>
+	<option value = "Mouse">Mouse</option>
+	<option value = "Opossum">Opossum</option>
+	<option value = "Rabbit">Rabbit</option>
+	<option value = "Squirrel">Squirrel</option>
+	<option value = "No Animal Visible">No Animal Visible</option>
+         </select>
+
+<!-- Adds animal tag-->
+<input onclick="addTag();" type=button value="+">
+</div>
+</form>
+
+<body onload="displayImage()">
+<div class = "center2">
+<input onclick="displayImage();" type=button value="Next Image">
+</div>
+</body>
+<script>
+
+
+
+
+<!-- Temporary images for the site to work- also creates image array-->
+var image1 = {name:"dog.jpg", animal:""};
+var image2 = {name:"cat.jpg", animal:""};
+var image3 = {name:"squirrel.jpg", animal:""};
+var image4 = {name:"rabbit.jpg", animal:""};
+var image5 = {name:"hawk.jpg", animal:""};
+var image6 = {name:"opossum.jpg", animal:""};
+var image7 = {name:"frog.jpg", animal:""};
+var image8 = {name:"chair.png", animal:""};
+var images = [image1, image2, image3, image4, image5, image6, image7, image8];
+var num = -1;
+
+<!-- Display image funciton- chooses a random image, and displays it. Also gets the tag and displays it-->
+function displayImage(){
+    num = Math.floor(Math.random() * images.length);
+
+    var species= images[num].animal;
+    document.getElementById("suspectedTag").innerHTML = species;
+
+    var tempImage = images[1];
+    document.getElementById("dropdown").selectedIndex = 0;
+    document.canvas.src = images[num].name;
+
+
+}
+<!-- Called when + button is pushed. Adds a tag to an image -->
+function addTag(){
+    dropDownChoice = document.getElementById("dropdown").value;
+        if (num != -1 && dropDownChoice != "none") {
+	    images[num].animal = dropDownChoice;
+	}
+    
+    var species= images[num].animal;
+    document.getElementById("suspectedTag").innerHTML = species;
+}
+<!-- Makes the dropdown start at "Select Species" each time-->
+function restoreDefault(){
+  
+   d.g("dropdown").selectedIndex = 1;
+}
+
+</script>
+</body>
+</html>
